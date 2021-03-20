@@ -4,6 +4,12 @@
   router-link.link(to="/join")
 </template>
 
+<script>
+export default {
+  mounted() {},
+};
+</script>
+
 <style scoped>
 .main {
   width: 100%;
