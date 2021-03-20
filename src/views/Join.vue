@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { getOrganizations } from "@/helpers/resource";
+import { getOption } from "@/helpers/resource";
 
 export default {
   data: () => {
@@ -36,7 +36,7 @@ export default {
     },
   },
   async created() {
-    this.orgs = await getOrganizations();
+    this.orgs = await getOption("malu_organizations");
   },
 };
 </script>

@@ -19,7 +19,7 @@ export async function getTerm(name) {
   return res.data;
 }
 
-export async function getOrganizations() {
-  const res = await http.get("organizations");
+export async function getOption(key) {
+  const res = await http.get("option/" + key);
   return res.data;
 }
