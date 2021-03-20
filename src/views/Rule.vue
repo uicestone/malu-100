@@ -5,23 +5,34 @@
     span 打卡须知
   .rule
     ul.rule_ul
-      li
-        i 1
-        font 打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知
-      li
-        i 2
-        font 打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知
-      li
-        i 3
-        font 打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知
-      li
-        i 4
-        font 打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知
-      li
-        i 5
-        font 打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知打卡须知
+      li(v-for="(line, index) in rules")
+        i {{ index + 1 }}
+        font {{ line }}
   router-link.btn.flexCenter(to="map") 进入地图
 </template>
+
+<script>
+import { getPostDetail } from "@/helpers/resource";
+
+export default {
+  data() {
+    return {
+      rules: [],
+    };
+  },
+  async created() {
+    const post = await getPostDetail("100-rules");
+    const matches = post.content.match(/<p.*?>(.*?)<\/p>/g);
+    if (matches) {
+      const paras = matches.map((m) => {
+        const match = m.match(/<p.*?>(.*?)<\/p>/);
+        return match[1];
+      });
+      this.rules = paras;
+    }
+  },
+};
+</script>
 
 <style scoped>
 .main {
