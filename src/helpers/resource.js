@@ -33,3 +33,8 @@ export async function getAuthUser(openid) {
   const res = await http.get("wx/auth/user", { params: { openid } });
   return res.data;
 }
+
+export async function updateUser(openid, set) {
+  const res = await http.post("pbpark/user", set, { params: { openid } });
+  return res.data;
+}

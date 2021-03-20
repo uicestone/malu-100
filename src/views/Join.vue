@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { getOption } from "@/helpers/resource";
+import { getOption, updateUser } from "@/helpers/resource";
 
 export default {
   data: () => {
@@ -31,7 +31,9 @@ export default {
     toggleDropDown() {
       this.showDropDown = !this.showDropDown;
     },
-    submit() {
+    async submit() {
+      if (!this.selectedUnit) return;
+      await updateUser(this.$openid, { organization: this.selectedUnit });
       this.$router.push("/countdown");
     },
   },

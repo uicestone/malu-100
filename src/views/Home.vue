@@ -1,12 +1,20 @@
 <template lang="pug">
 .main
   img.img(src="/images/1-home-img.png")
-  router-link.link(to="/join")
+  a.link(@click="start")
 </template>
 
 <script>
 export default {
-  mounted() {},
+  methods: {
+    start() {
+      if (this.$user.org) {
+        this.$router.push("countdown");
+      } else {
+        this.$router.push("join");
+      }
+    },
+  },
 };
 </script>
 
