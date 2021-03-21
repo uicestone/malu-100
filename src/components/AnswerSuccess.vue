@@ -12,8 +12,14 @@
 </template>
 
 <script>
+import { getAuthUser } from "@/helpers/resource";
+
 export default {
   name: "AnswerSuccess",
+  async mounted() {
+    const user = await getAuthUser(this.$openid);
+    this.$user = user;
+  },
 };
 </script>
 
