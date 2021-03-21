@@ -38,7 +38,7 @@ export default {
 <style scoped>
 .main {
   width: 100%;
-  height: 21.15rem;
+  /* height: 21.15rem; */
   background: url(/images/3-bg.png) no-repeat;
   background-size: 12.08rem 21.14rem;
   background-position: center center;

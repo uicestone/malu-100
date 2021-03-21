@@ -110,10 +110,10 @@ const positions = [
 <style scoped>
 .main {
   width: 100%;
-  height: auto;
+  /* height: auto; */
   background: url(/images/5-map-bg.png) no-repeat;
-  background-size: 108% !important;
-  background-position: center center;
+  background-size: cover;
+  background-position: center;
   padding: 0.4rem 0;
 }
 .img {
