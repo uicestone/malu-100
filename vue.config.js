@@ -1,7 +1,7 @@
 module.exports = {
   publicPath: process.env.PUBLIC_PATH,
   devServer: {
-    // host: "malu100.com",
+    host: "localhost",
     // port: "80",
   },
   chainWebpack: (config) => {
