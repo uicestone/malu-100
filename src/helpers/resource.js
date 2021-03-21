@@ -43,3 +43,13 @@ export async function get100Days() {
   const res = await http.get("pbpark/100d");
   return res.data;
 }
+
+export async function get100Day(id) {
+  const res = await http.get("pbpark/100d/" + id);
+  return res.data;
+}
+
+export async function saveAnswer(openid, dayId, data) {
+  const res = await http.post(`pbpark/100d/${dayId}?openid=${openid}`, data);
+  return res.data;
+}

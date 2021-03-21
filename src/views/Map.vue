@@ -10,7 +10,8 @@ div
     img.title(src="images/5-map-title-1.png")
     .map(@click="mapClick")
       .m.bg1(
-        @click="openTip(n)",
+        @click.stop="openTip(n)",
+        :class="{ bg2: answered(n) }",
         v-for="n in 20",
         :style="{ top: getY(currentMap, n) + 'rem', left: getX(currentMap, n) + 'rem' }"
       ) {{ n }}
@@ -46,7 +47,7 @@ export default {
     },
     goToTask() {
       if (!this.day) return;
-      this.$router.push("/" + this.day.type);
+      this.$router.push("/" + this.day.type + "?dayId=" + this.day.id);
     },
     mapClick(e) {
       const r = 34.7222222222;
@@ -59,6 +60,10 @@ export default {
     },
     getY(m, n) {
       return positions[m - 1][n - 1][1];
+    },
+    answered(n) {
+      if (!this.$user || !this.$user.answered_days) return false;
+      return this.$user.answered_days.includes(n);
     },
   },
   async created() {

@@ -97,17 +97,16 @@ div
       .flexBetween(style="width: 100%;padding: 0 0.5rem;margin-top: 1rem;")
         .btn.btn1.flexCenter 返回首页
         .btn.btn2.flexCenter 再来一次
-  .pop.pop2(style="display: none;")
-    .tips(style="padding-top: 0.5rem;")
-      h1(style="line-height: 1rem;")
-        | 恭喜你打卡成功
-        br
-        | 获得主题徽章一枚
-      img.icon2(src="/images/6-qa-badge.png")
-      .flexBetween(style="width: 100%;padding: 0 0.5rem;margin-top: 0.5rem;")
-        .btn.btn1.flexCenter 返回首页
-        .btn.btn3.flexCenter 我的徽章
+  answer-success
 </template>
+
+<script>
+import AnswerSuccess from "../components/AnswerSuccess";
+
+export default {
+  components: { AnswerSuccess },
+};
+</script>
 
 <style scoped>
 .main {

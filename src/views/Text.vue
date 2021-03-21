@@ -1,11 +1,39 @@
 <template lang="pug">
 .main
   img.title(src="/images/6-text-title.png")
-  textarea.textarea(placeholder="输入文字")
+  textarea.textarea(placeholder="输入文字", v-model="text")
   .tips
-    | 写一句话写一句话写一句话写一句话写一句话写一句话写一句话写一句话写一句话写一句话
-  .btn.flexCenter 提交
+    | {{ day.requirement }}
+  .btn.flexCenter(@click="submit", :class="{ disabled: !text }") 提交
+  answer-success(v-if="success")
 </template>
+
+<script>
+import AnswerSuccess from "../components/AnswerSuccess";
+import { get100Day, saveAnswer } from "@/helpers/resource";
+
+export default {
+  components: { AnswerSuccess },
+  data: () => {
+    return {
+      day: {},
+      text: "",
+      success: false,
+    };
+  },
+  methods: {
+    async submit() {
+      if (!this.text) return;
+      await saveAnswer(this.$openid, this.day.id, { answer: this.text });
+      this.success = true;
+    },
+  },
+  async created() {
+    const dayId = this.$route.query.dayId;
+    this.day = await get100Day(dayId);
+  },
+};
+</script>
 
 <style scoped>
 .main {
@@ -40,6 +68,9 @@
   font-size: 0.6rem;
   font-weight: bold;
   color: #956134;
+}
+.btn.disabled {
+  opacity: 0.5;
 }
 .textarea {
   width: 7.4rem;
