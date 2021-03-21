@@ -11,8 +11,11 @@
           ul.list
             li(v-for="row in 5")
               a(v-for="cell in 4")
-                img(src="/images/6-qa-badge.png")
-                span 2021年3月23日
+                img(
+                  v-if="answered(page, row, cell)",
+                  src="/images/6-qa-badge.png"
+                )
+                span {{ getDateText(page, row, cell) }}
       .swiper-pagination
     .swiper-button-prev
     .swiper-button-next
@@ -23,6 +26,24 @@ import Swiper from "swiper";
 import "swiper/css/swiper.css";
 
 export default {
+  methods: {
+    getDayFromCell(page, row, cell) {
+      return (page - 1) * 20 + (row - 1) * 4 + cell;
+    },
+    answered(page, row, cell) {
+      const n = this.getDayFromCell(page, row, cell);
+      if (!this.$user || !this.$user.answered_days) return false;
+      return this.$user.answered_days.includes(n);
+    },
+    getDateText(page, row, cell) {
+      const n = this.getDayFromCell(page, row, cell);
+      const date = new Date("2021-07-01 00:00:00");
+      date.setDate(date.getDate() - 100 + n - 1);
+      const m = date.getMonth() + 1;
+      const d = date.getDate();
+      return `${m}月${d}日`;
+    },
+  },
   mounted() {
     new Swiper(".swiper-container", {
       pagination: {
