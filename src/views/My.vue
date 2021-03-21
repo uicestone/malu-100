@@ -67,7 +67,7 @@ export default {
 <style scoped>
 .main {
   width: 100%;
-  height: 21.15rem;
+  /* height: 21.15rem; */
   background: url(/images/3-bg.png) no-repeat;
   background-size: 12.08rem 21.14rem;
   background-position: center center;
@@ -99,7 +99,7 @@ export default {
 }
 .content {
   width: 9.6rem;
-  height: 15rem;
+  height: 70vh;
   background: #fff;
   border: 2px solid #c51923;
   margin: auto;
@@ -108,11 +108,11 @@ export default {
 }
 .swiper-container {
   width: 100%;
-  height: 16rem;
+  height: 75vh;
 }
 .swiper-slide {
   width: 100%;
-  height: 15rem;
+  height: 70rem;
 }
 .swiper-slide ul {
   width: 100%;
@@ -120,7 +120,7 @@ export default {
 }
 .swiper-slide ul li {
   width: 100%;
-  height: 2.9rem;
+  height: 13.6vh;
   border-bottom: 1px dashed #c9bc9c;
 }
 .list li:last-child {
@@ -175,7 +175,7 @@ export default {
   background: #c51923;
   width: 0.5rem;
   height: 0.5rem;
-  top: 15.78rem;
+  top: 73.9vh;
   left: 3rem;
   background: url(/images/3-my-arrow-l.png) no-repeat;
   background-size: 100% 100%;
@@ -187,7 +187,7 @@ export default {
   height: 0.5rem;
   background: url(/images/3-my-arrow-r.png) no-repeat;
   background-size: 100% 100%;
-  top: 15.78rem;
+  top: 73.9vh;
   right: 3rem;
 }
 .swiper-button-prev:after,

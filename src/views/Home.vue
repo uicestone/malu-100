@@ -1,7 +1,8 @@
 <template lang="pug">
 .main
-  img.img(src="/images/1-home-img.png")
-  a.link(@click="start")
+  .start
+    img.img(src="/images/1-home-img.png")
+    a.link(@click="start")
 </template>
 
 <script>
@@ -21,11 +22,19 @@ export default {
 <style scoped>
 .main {
   width: 100%;
-  height: 21.15rem;
+  /* height: 21.15rem; */
   background: url(/images/1-home-bg.png) no-repeat;
   background-size: cover;
   background-position: center center;
-  padding-top: 16.47rem;
+  /* padding-top: 16.47rem; */
+  position: relative;
+}
+.start {
+  position: absolute;
+  bottom: 3rem;
+  margin-bottom: -1.64rem;
+  left: 0;
+  right: 0;
 }
 .img {
   width: 6.1rem;

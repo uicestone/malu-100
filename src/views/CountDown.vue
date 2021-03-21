@@ -13,15 +13,16 @@
     span {{ minutes | format }}
     i :
     span {{ seconds | format }}
-  router-link.tag.tag1.flexEnd(to="rule")
-    img.icon1(src="/images/2-content-item-icon-1.png")
-    span 打卡须知
-  router-link.tag.tag2.flexEnd(to="map")
-    img.icon2(src="/images/2-content-item-icon-2.png")
-    span 百日打卡
-  router-link.tag.tag3.flexEnd(to="my")
-    img.icon3(src="/images/2-content-item-icon-3.png")
-    span 我的徽章
+  .links
+    router-link.tag.tag1.flexEnd(to="rule")
+      img.icon1(src="/images/2-content-item-icon-1.png")
+      span 打卡须知
+    router-link.tag.tag2.flexEnd(to="map")
+      img.icon2(src="/images/2-content-item-icon-2.png")
+      span 百日打卡
+    router-link.tag.tag3.flexEnd(to="my")
+      img.icon3(src="/images/2-content-item-icon-3.png")
+      span 我的徽章
 </template>
 
 <script>
@@ -63,12 +64,14 @@ export default {
 <style scoped>
 .main {
   width: 100%;
-  height: 21.15rem;
+  /* height: 21.15rem; */
   background: url(/images/2-content-bg.png) no-repeat;
   background-size: 12.19rem 21.65rem;
   background-position: center center;
   position: relative;
   padding-top: 5.7rem;
+  display: flex;
+  flex-direction: column;
 }
 .content-title {
   width: 4rem;
@@ -88,7 +91,7 @@ h1 {
   height: 1.82rem;
   background: url(/images/2-content-countdown-bg.png) no-repeat;
   background-size: 100% 100%;
-  margin: auto;
+  margin: 0 auto;
   margin-top: 0.7rem;
   font-size: 0.9rem;
   font-weight: bold;
@@ -106,12 +109,19 @@ h1 {
 .time span {
   width: 1rem;
 }
+.links {
+  /* margin-bottom: 1.5rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
 .tag {
   width: 6.7rem;
   height: 2.24rem;
   background: url(/images/2-content-item-bg.png) no-repeat;
   background-size: 100% 100%;
-  margin: auto;
+  margin: 0 auto;
   position: relative;
   font-size: 0.7rem;
   line-height: 0.8rem;
@@ -142,7 +152,7 @@ h1 {
   top: 0.5rem;
 }
 .tag1 {
-  margin-top: 1.5rem;
+  margin-top: 0.5rem;
 }
 .tag2,
 .tag3 {

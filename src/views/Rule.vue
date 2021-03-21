@@ -4,10 +4,11 @@
     img(src="/images/2-content-item-icon-1.png")
     span 打卡须知
   .rule
-    ul.rule_ul
-      li(v-for="(line, index) in rules")
-        i {{ index + 1 }}
-        font {{ line }}
+    .rule-inner
+      ul.rule_ul
+        li(v-for="(line, index) in rules")
+          i {{ index + 1 }}
+          font {{ line }}
   router-link.btn.flexCenter(to="map") 进入地图
 </template>
 
@@ -59,12 +60,23 @@ export default {
 }
 .rule {
   width: 8.64rem;
-  height: 14.8rem;
-  background: url(/images/4-rule-border.png) #fff no-repeat;
-  background-size: 100% 100%;
+  height: 13rem;
+  background: url(/images/4-rule-border.png) #fff no-repeat bottom;
+  background-size: 100%;
+  margin: auto;
+  margin-top: 1.3rem;
+  height: calc(100vh - 5.76rem);
+  max-height: 513px;
+}
+.rule-inner {
+  padding: 0.8rem;
+  height: calc(100% - 50px);
+  background: url(/images/4-rule-border.png) #fff no-repeat top;
+  background-size: 100%;
   margin: auto;
   margin-top: 1.3rem;
   padding: 0.8rem;
+  padding-bottom: 0;
 }
 .rule li {
   width: 100%;
