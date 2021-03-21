@@ -5,14 +5,14 @@
     | 距离中国共产党成立
     br
     | 100周年华诞
-  .time.flexStart
-    span(style="margin-left: 0.9rem;") {{ days | format }}
-    i(style="margin-left: 0.5rem;") :
-    span(style="margin-left: 0.65rem;") {{ hours | format }}
-    i(style="margin-left: 0.4rem;") :
-    span(style="margin-left: 0.3rem;") {{ minutes | format }}
-    i(style="margin-left: 0.4rem;") :
-    span(style="margin-left: 0.4rem;") {{ seconds | format }}
+  .time.flexBetween
+    span {{ days | format }}
+    i :
+    span {{ hours | format }}
+    i :
+    span {{ minutes | format }}
+    i :
+    span {{ seconds | format }}
   router-link.tag.tag1.flexEnd(to="rule")
     img.icon1(src="/images/2-content-item-icon-1.png")
     span 打卡须知
@@ -94,12 +94,17 @@ h1 {
   font-weight: bold;
   color: #fff;
   padding-top: 0.5rem;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  padding: 0.5rem 0.6rem 0 1rem;
 }
 /*.time span{
 			margin: 0 0.3rem;
 		}*/
 .time i {
   font-style: none;
+}
+.time span {
+  width: 1rem;
 }
 .tag {
   width: 6.7rem;
@@ -108,12 +113,15 @@ h1 {
   background-size: 100% 100%;
   margin: auto;
   position: relative;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 0.8rem;
   font-weight: bold;
   color: #d3b485;
-  padding-right: 1rem;
+  padding-right: 1.2rem;
   letter-spacing: 0.1rem;
+}
+.tag span {
+  margin-bottom: 0.1rem;
 }
 .icon1 {
   width: 0.9rem;

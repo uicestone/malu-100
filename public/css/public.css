@@ -101,6 +101,15 @@ button {
   -webkit-appearance: none !important;
 }
 
+@font-face {
+  font-family: "Impact";
+  src: url("/fonts/subset-Impact.woff2") format("woff2"),
+    url("/fonts/subset-Impact.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*主样式*/
 .pull-left {
   float: left !important;
