@@ -3,7 +3,7 @@
   .header.flexCenter
     img(src="/images/3-my-icon.png")
     span 我的徽章
-  .title.flexCenter 学党史
+  .title.flexCenter {{ titles[currentPage - 1] }}
   .content
     .swiper-container
       .swiper-wrapper
@@ -17,8 +17,8 @@
                 )
                 span {{ getDateText(page, row, cell) }}
       .swiper-pagination
-    .swiper-button-prev
-    .swiper-button-next
+    .swiper-button-prev(@click="currentPage--")
+    .swiper-button-next(@click="currentPage++")
 </template>
 
 <script>
@@ -26,6 +26,12 @@ import Swiper from "swiper";
 import "swiper/css/swiper.css";
 
 export default {
+  data: () => {
+    return {
+      currentPage: 1,
+      titles: ["南湖星火", "峥嵘岁月", "奋辑争先", "不负韶华", "赓续辉煌"],
+    };
+  },
   methods: {
     getDayFromCell(page, row, cell) {
       return (page - 1) * 20 + (row - 1) * 4 + cell;
@@ -169,7 +175,7 @@ export default {
   background: #c51923;
   width: 0.5rem;
   height: 0.5rem;
-  top: 15.7rem;
+  top: 15.78rem;
   left: 3rem;
   background: url(/images/3-my-arrow-l.png) no-repeat;
   background-size: 100% 100%;
@@ -181,12 +187,15 @@ export default {
   height: 0.5rem;
   background: url(/images/3-my-arrow-r.png) no-repeat;
   background-size: 100% 100%;
-  top: 15.7rem;
+  top: 15.78rem;
   right: 3rem;
 }
 .swiper-button-prev:after,
 .swiper-button-next:after {
   font-size: 0;
+}
+.swiper-container-horizontal > .swiper-pagination-bullets {
+  bottom: 5px;
 }
 :root {
   --swiper-theme-color: #c61c22;
