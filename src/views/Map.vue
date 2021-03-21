@@ -11,7 +11,7 @@ div
     .map(@click="mapClick")
       .m.bg1(
         @click.stop="openTip(n)",
-        :class="{ bg2: answered(n) }",
+        :class="{ bg2: answerable(n), bg3: answered(n) }",
         v-for="n in 20",
         :style="{ top: getY(currentMap, n) + 'rem', left: getX(currentMap, n) + 'rem' }"
       ) {{ n }}
@@ -38,6 +38,10 @@ export default {
       this.showTip = !this.showTip;
     },
     openTip(n) {
+      if (!this.answerable(n)) return;
+      if (this.answered(n)) {
+        return this.$router.push("/my");
+      }
       this.showTip = true;
       const day = this.days.find((d) => d.day === n);
       if (!day) {
@@ -60,6 +64,13 @@ export default {
     },
     getY(m, n) {
       return positions[m - 1][n - 1][1];
+    },
+    answerable(n) {
+      const day = this.days.find((d) => d.day === n);
+      if (!day) {
+        return false;
+      }
+      return day.available;
     },
     answered(n) {
       if (!this.$user || !this.$user.answered_days) return false;
