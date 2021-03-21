@@ -8,8 +8,12 @@ div
       img.i4(src="images/5-map-tab-4-disabled.png")
       img.i5(src="images/5-map-tab-5-disabled.png")
     img.title(src="images/5-map-title-1.png")
-    .map
-      .m.m1.bg3(@click="toggleTip") 1
+    .map(@click="mapClick")
+      .m.bg1(
+        @click="openTip(n)",
+        v-for="n in 20",
+        :style="{ top: getY(currentMap, n) + 'rem', left: getX(currentMap, n) + 'rem' }"
+      ) {{ n }}
   .tips(v-if="showTip")
     .flexBetween(style="width: 100%; height: 100%;padding: 0 0.5rem;")
       .btn.btn1.flexCenter(@click="goToTask") 打卡
@@ -17,21 +21,74 @@ div
 </template>
 
 <script>
+import { get100Days } from "@/helpers/resource";
+
 export default {
   data: () => {
     return {
       showTip: false,
+      currentMap: 1,
+      days: [],
+      day: null,
     };
   },
   methods: {
     toggleTip() {
       this.showTip = !this.showTip;
     },
+    openTip(n) {
+      this.showTip = true;
+      const day = this.days.find((d) => d.day === n);
+      if (!day) {
+        return;
+      }
+      this.day = day;
+    },
     goToTask() {
-      this.$router.push("/text");
+      if (!this.day) return;
+      this.$router.push("/" + this.day.type);
+    },
+    mapClick(e) {
+      const r = 34.7222222222;
+      const y = e.layerY / r - 1.44 / 2;
+      const x = e.layerX / r - 1.52 / 2;
+      console.log(+x.toFixed(6), +y.toFixed(6));
+    },
+    getX(m, n) {
+      return positions[m - 1][n - 1][0];
+    },
+    getY(m, n) {
+      return positions[m - 1][n - 1][1];
     },
   },
+  async created() {
+    this.days = await get100Days();
+  },
 };
+const positions = [
+  [
+    [1.2272, 20.016],
+    [4.856, 19.2096],
+    [8.2256, 18.7776],
+    [7.5056, 16.992],
+    [4.136, 16.8768],
+    [0.968, 16.3872],
+    [1.8896, 13.824],
+    [5.0288, 12.8448],
+    [8.1968, 12.528],
+    [8.5136, 10.2528],
+    [4.2512, 9.4752],
+    [1.2272, 9.1872],
+    [0.7088, 5.8464],
+    [4.856, 6.4512],
+    [8.024, 6.5952],
+    [8.6, 4.2912],
+    [5.2304, 3.4272],
+    [1.3136, 2.88],
+    [3.0704, 0.9216],
+    [7.7648, 0.6912],
+  ],
+];
 </script>
 
 <style scoped>
@@ -39,13 +96,14 @@ export default {
   width: 100%;
   height: auto;
   background: url(/images/5-map-bg.png) no-repeat;
-  background-size: cover;
+  background-size: 108% !important;
   background-position: center center;
   padding: 0.4rem 0;
 }
 .img {
   width: 100%;
   padding: 0 0.4rem;
+  margin: 0 0.1rem;
 }
 .i1 {
   width: 1.78rem;
@@ -97,86 +155,6 @@ export default {
 .bg3 {
   background: url(/images/5-map-star-primary.png) no-repeat;
   background-size: 100% 100%;
-}
-.m1 {
-  left: 1.56rem;
-  top: 3.37rem;
-}
-.m2 {
-  left: 3.92rem;
-  top: 3.48rem;
-}
-.m3 {
-  left: 5.94rem;
-  top: 3.42rem;
-}
-.m4 {
-  left: 7.89rem;
-  top: 3.93rem;
-}
-.m5 {
-  left: 1.17rem;
-  top: 5.64rem;
-}
-.m6 {
-  left: 3.9rem;
-  top: 5.38rem;
-}
-.m7 {
-  left: 6rem;
-  top: 5.59rem;
-}
-.m8 {
-  left: 7.98rem;
-  top: 6.12rem;
-}
-.m9 {
-  left: 3.39rem;
-  top: 7.74rem;
-}
-.m10 {
-  left: 6.06rem;
-  top: 8.38rem;
-}
-.m11 {
-  left: 8.13rem;
-  top: 8.86rem;
-}
-.m12 {
-  left: 7.53rem;
-  top: 10.89rem;
-}
-.m13 {
-  left: 4.72rem;
-  top: 10.44rem;
-}
-.m14 {
-  left: 0.8rem;
-  top: 11rem;
-}
-.m15 {
-  left: 1.5rem;
-  top: 13.12rem;
-}
-.m16 {
-  left: 3.9rem;
-  top: 12.97rem;
-}
-.m17 {
-  left: 7.08rem;
-  top: 13.68rem;
-}
-.m18 {
-  left: 1.14rem;
-  top: 15.6rem;
-}
-.m19 {
-  left: 4.44rem;
-  top: 15.6rem;
-}
-.m20 {
-  left: 7.38rem;
-  top: 15.6rem;
 }
 .tips {
   width: 8.3rem;

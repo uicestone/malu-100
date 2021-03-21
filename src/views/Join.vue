@@ -33,7 +33,9 @@ export default {
     },
     async submit() {
       if (!this.selectedUnit) return;
-      await updateUser(this.$openid, { organization: this.selectedUnit });
+      this.$user = await updateUser(this.$openid, {
+        organization: this.selectedUnit,
+      });
       this.$router.push("/countdown");
     },
   },

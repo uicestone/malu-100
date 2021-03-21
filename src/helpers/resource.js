@@ -38,3 +38,8 @@ export async function updateUser(openid, set) {
   const res = await http.post("pbpark/user", set, { params: { openid } });
   return res.data;
 }
+
+export async function get100Days() {
+  const res = await http.get("pbpark/100d");
+  return res.data;
+}

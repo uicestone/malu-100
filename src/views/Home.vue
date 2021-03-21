@@ -8,7 +8,7 @@
 export default {
   methods: {
     start() {
-      if (this.$user.org) {
+      if (this.$user.organization) {
         this.$router.push("countdown");
       } else {
         this.$router.push("join");
