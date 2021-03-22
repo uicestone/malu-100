@@ -40,6 +40,9 @@ export default {
     },
   },
   async created() {
+    if (this.$user.organization) {
+      this.$router.push("/countdown");
+    }
     this.orgs = await getOption("malu_organizations");
   },
 };
@@ -48,12 +51,13 @@ export default {
 <style scoped>
 .main {
   width: 100%;
-  height: 21.15rem;
+  /* height: 21.15rem; */
   background: url(/images/2-content-bg.png) no-repeat;
   background-size: 12.19rem 21.65rem;
   background-position: center center;
   position: relative;
   padding-top: 6.3rem;
+  padding-top: max(33vh, 5.8rem);
 }
 .content-title {
   width: 4rem;
@@ -118,6 +122,7 @@ export default {
   height: 4.82rem;
   margin: auto;
   margin-top: 1.2rem;
+  margin-top: max(0.5rem, 4vh);
 }
 .btn {
   width: 4.8rem;
@@ -129,6 +134,7 @@ export default {
   font-weight: bold;
   color: #614c3f;
   margin-top: 1.6rem;
+  margin-top: max(0.5rem, 8vh);
 }
 .options {
   width: 100%;
@@ -137,9 +143,9 @@ export default {
 }
 .title {
   width: 100%;
-  font-size: 0.7rem;
+  font-size: 0.55rem;
   font-weight: bold;
-  line-height: 0.7rem;
+  line-height: 0.55rem;
   text-align: center;
   color: #804e21;
   overflow: hidden;
