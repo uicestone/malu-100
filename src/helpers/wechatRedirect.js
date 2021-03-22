@@ -1,8 +1,8 @@
 import { getAuthUser, wechatLogin } from "./resource";
 
 const appId = "wxccb5433a51ab1bb4";
-const homeUrl = "http://100.malu.hbird.com.cn";
-// const homeUrl = "http://malu100.com";
+const currentUrl = location.href;
+// const currentUrl = "http://malu100.com";
 
 export default async function wechatRedirect(userInfo = false, state = "") {
   const query = window.location.search
@@ -27,7 +27,7 @@ export default async function wechatRedirect(userInfo = false, state = "") {
     window.localStorage.setItem("user", JSON.stringify(user));
   } else {
     let url = `https://open.weixin.qq.com/connect/oauth2/authorize?appid=${appId}&redirect_uri=${encodeURIComponent(
-      homeUrl
+      currentUrl
     )}&response_type=code&scope=${
       userInfo ? "snsapi_userinfo" : "snsapi_base"
     }&state=${encodeURIComponent(state)}`;
