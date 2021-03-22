@@ -17,8 +17,8 @@
                 )
                 span {{ getDateText(page, row, cell) }}
       .swiper-pagination
-    .swiper-button-prev(@click="currentPage--")
-    .swiper-button-next(@click="currentPage++")
+    .swiper-button-prev
+    .swiper-button-next
 </template>
 
 <script>
@@ -51,13 +51,18 @@ export default {
     },
   },
   mounted() {
-    new Swiper(".swiper-container", {
+    const swiper = new Swiper(".swiper-container", {
       pagination: {
         el: ".swiper-pagination",
       },
       navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
+      },
+      on: {
+        slideChange: () => {
+          this.currentPage = swiper.activeIndex + 1;
+        },
       },
     });
   },
