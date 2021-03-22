@@ -66,6 +66,7 @@ export default {
       return positions[m - 1][n - 1][1];
     },
     answerable(n) {
+      if (this.$route.query.test) return true;
       const day = this.days.find((d) => d.day === n);
       if (!day) {
         return false;
