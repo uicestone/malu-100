@@ -88,10 +88,12 @@ export default {
   position: absolute;
   left: 0;
   top: 0.04rem;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   line-height: 1.18rem;
   padding: 0 0.5rem;
   color: #b18147;
+  text-align: center;
+  letter-spacing: 0.05rem;
 }
 .selectList {
   width: 7.14rem;
