@@ -1,6 +1,6 @@
 import { getAuthUser, wechatLogin } from "./resource";
 
-const appId = "wxccb5433a51ab1bb4";
+const appId = "wx37d297409de16479";
 const currentUrl = location.href;
 // const currentUrl = "http://malu100.com";
 
