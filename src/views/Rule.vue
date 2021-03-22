@@ -8,7 +8,7 @@
       ul.rule_ul
         li(v-for="(line, index) in rules")
           i {{ index + 1 }}
-          font {{ line }}
+          font(v-html="line")
   router-link.btn.flexCenter(to="map") 进入地图
 </template>
 
