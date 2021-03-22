@@ -2,11 +2,11 @@
 div
   .main
     .img.flexBetween
-      img.i1(src="images/5-map-tab-1-primary.png")
-      img.i2(src="images/5-map-tab-2-secondary.png")
-      img.i3(src="images/5-map-tab-3-disabled.png")
-      img.i4(src="images/5-map-tab-4-disabled.png")
-      img.i5(src="images/5-map-tab-5-disabled.png")
+      img.i1(src="images/5-map-tab-1a.png")
+      img.i2(src="images/5-map-tab-2d.png")
+      img.i3(src="images/5-map-tab-3d.png")
+      img.i4(src="images/5-map-tab-4d.png")
+      img.i5(src="images/5-map-tab-5d.png")
     img.title(src="images/5-map-title-1.png")
     .map(@click="mapClick")
       .m.bg1(
