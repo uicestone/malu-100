@@ -43,7 +43,7 @@ export default {
     },
     getDateText(page, row, cell) {
       const n = this.getDayFromCell(page, row, cell);
-      const date = new Date("2021-07-01 00:00:00");
+      const date = new Date("2021/07/01 00:00:00");
       date.setDate(date.getDate() - 100 + n - 1);
       const m = date.getMonth() + 1;
       const d = date.getDate();

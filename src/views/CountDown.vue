@@ -26,7 +26,7 @@
 </template>
 
 <script>
-const target = new Date("2021-07-01 00:00:00").valueOf() / 1000;
+const target = new Date("2021/07/01 00:00:00").valueOf() / 1000;
 export default {
   data: () => {
     return { interval: null, now: Date.now() / 1000 };
