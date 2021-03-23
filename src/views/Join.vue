@@ -14,7 +14,6 @@
         ul.optionList(v-for="u in o.units")
           li(@click="selectedUnit = u; toggleDropDown()") {{ u }}
   .btn.flexCenter(@click="submit", :class="{ disabled: !selectedUnit }") 确认
-  img(src="/images/2-content-select-container.png", style="display:none")
 </template>
 
 <script>
@@ -175,5 +174,13 @@ export default {
   background: -webkit-linear-gradient(to bottom, #c89f62, #9f6d3c);
   background: linear-gradient(to bottom, #c89f62, #9f6d3c);
   border-radius: 500px;
+}
+.main::after {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  content: url("/images/2-content-select-container.png");
 }
 </style>
