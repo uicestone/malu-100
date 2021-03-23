@@ -7,13 +7,14 @@
       | {{ selectedUnit }}
   h1.tip1 党员
   img.tipsImg(src="/images/2-attend-text.png")
-  .selectList(v-if="showDropDown")
+  .selectList(v-show="showDropDown")
     .list
       .options(v-for="o in orgs")
         .title {{ o.catName }}
         ul.optionList(v-for="u in o.units")
           li(@click="selectedUnit = u; toggleDropDown()") {{ u }}
-  .btn.flexCenter(@click="submit") 确认
+  .btn.flexCenter(@click="submit", :class="{ disabled: !selectedUnit }") 确认
+  img(src="/images/2-content-select-container.png", style="display:none")
 </template>
 
 <script>
@@ -137,6 +138,9 @@ export default {
   color: #614c3f;
   margin-top: 1.6rem;
   margin-top: max(0.5rem, 8vh);
+}
+.btn.disabled {
+  opacity: 0.5;
 }
 .options {
   width: 100%;
