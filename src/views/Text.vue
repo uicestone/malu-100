@@ -4,7 +4,13 @@
   textarea.textarea(placeholder="输入文字", v-model="text")
   .tips
     | {{ day.requirement }}
-  .btn.flexCenter(@click="submit", :class="{ disabled: !text }") 提交
+  .btn.flexCenter(
+    @click="submit",
+    :class="{ disabled: !text || submitting }",
+    v-if="!success"
+  )
+    span(v-if="submitting") 提交中…
+    span(v-else) 提交
   answer-success(v-if="success")
 </template>
 
@@ -19,12 +25,15 @@ export default {
       day: {},
       text: "",
       success: false,
+      submitting: false,
     };
   },
   methods: {
     async submit() {
       if (!this.text) return;
+      this.submitting = true;
       await saveAnswer(this.$openid, this.day.id, { answer: this.text });
+      this.submitting = false;
       this.success = true;
     },
   },
