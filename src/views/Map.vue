@@ -120,6 +120,8 @@ const positions = [
 .img {
   width: 100%;
   padding: 0 0.4rem;
+}
+.img img {
   margin: 0 0.1rem;
 }
 .i1 {
