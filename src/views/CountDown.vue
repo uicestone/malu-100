@@ -1,6 +1,11 @@
 <template lang="pug">
 .main
-  img.content-title(src="/images/2-content-title.png")
+  .content-title
+    .icon-100
+      img(src="/images/2-content-icon.png")
+    .split
+    .icon-malu
+      img(src="/images/2-content-title.png")
   h1
     | 距离中国共产党成立
     br
@@ -74,11 +79,26 @@ export default {
   flex-direction: column;
 }
 .content-title {
-  width: 4rem;
   position: absolute;
-  left: 50%;
-  margin-left: -2rem;
-  top: 1.2rem;
+  top: 1.4rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.content-title .icon-100 {
+  width: 4rem;
+}
+.content-title .split {
+  height: 2.4rem;
+  border-left: 1px solid white;
+  margin: 0 0.3rem;
+}
+.content-title .icon-malu {
+  width: 2.6rem;
+}
+.content-title img {
+  max-width: 100%;
 }
 h1 {
   font-size: 0.8rem;
