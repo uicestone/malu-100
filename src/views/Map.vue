@@ -1,7 +1,7 @@
 <template lang="pug">
 div
   .main
-    .img.flexBetween
+    .stages.flexBetween
       img.i1(src="images/5-map-tab-1a.png")
       img.i2(src="images/5-map-tab-2d.png")
       img.i3(src="images/5-map-tab-3d.png")
@@ -117,32 +117,15 @@ const positions = [
   background-position: center;
   padding: 0.4rem 0;
 }
-.img {
+.stages {
   width: 100%;
-  padding: 0 0.4rem;
+  padding: 0 0.2rem;
+  flex-wrap: nowrap;
 }
-.img img {
-  margin: 0 0.1rem;
-}
-.i1 {
-  width: 1.78rem;
-  height: 3.36rem;
-}
-.i2 {
-  width: 1.78rem;
-  height: 3.36rem;
-}
-.i3 {
-  width: 1.78rem;
-  height: 3.36rem;
-}
-.i4 {
-  width: 1.78rem;
-  height: 3.36rem;
-}
-.i5 {
-  width: 1.78rem;
-  height: 3.36rem;
+.stages img {
+  margin: 0 0.25rem;
+  min-width: 0;
+  object-fit: contain;
 }
 .map {
   width: 100%;
