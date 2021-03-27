@@ -121,6 +121,7 @@ const positions = [
   width: 100%;
   padding: 0 0.2rem;
   flex-wrap: nowrap;
+  height: 3rem;
 }
 .stages img {
   margin: 0 0.25rem;
