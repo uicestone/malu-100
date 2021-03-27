@@ -3,16 +3,22 @@ import { getAuthUser, wechatLogin } from "./resource";
 const appId = "wx37d297409de16479";
 const currentUrl = location.href;
 // const currentUrl = "http://malu100.com";
+const query = window.location.search
+  .substr(1)
+  .split("&")
+  .reduce((query, pair) => {
+    const [k, v] = pair.split("=");
+    query[k] = v;
+    return query;
+  }, {});
 
 export default async function wechatRedirect(userInfo = false, state = "") {
-  const query = window.location.search
-    .substr(1)
-    .split("&")
-    .reduce((query, pair) => {
-      const [k, v] = pair.split("=");
-      query[k] = v;
-      return query;
-    }, {});
+  if (query.clear) {
+    window.localStorage.clear();
+  }
+  if (query.openid) {
+    window.localStorage.setItem("openid", query.openid);
+  }
   if (window.localStorage.getItem("openid")) {
     window.localStorage.removeItem("user");
     if (!window.localStorage.getItem("user")) {
