@@ -2,8 +2,8 @@
 .main
   img.title(src="/images/6-video-title.png")
   video.preview(
-    preload="metadata",
     src="",
+    autoplay="true",
     v-show="selectedVideo",
     @click="playPause",
     ref="video"
@@ -138,10 +138,12 @@ video {
   width: 100%;
   object-fit: cover;
   display: block;
-  margin: 0 auto;
+  margin: 1rem auto 0;
+  padding: 0 0.4rem;
   position: absolute;
-  height: calc(100% - 3.75rem);
+  min-height: 56.25vw;
   object-position: center;
+  z-index: 10;
 }
 .box img {
   position: absolute;
@@ -171,6 +173,7 @@ video {
   font-size: 0.6rem;
   font-weight: bold;
   color: #956134;
+  z-index: 20;
 }
 .btn.disabled {
   opacity: 0.5;
