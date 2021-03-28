@@ -3,6 +3,7 @@
   img.title(src="/images/6-video-title.png")
   video.preview(
     src="",
+    preload="auto",
     autoplay="true",
     v-show="selectedVideo",
     @click="playPause",
