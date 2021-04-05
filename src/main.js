@@ -8,7 +8,7 @@ Vue.config.productionTip = false;
 Vue.use(globalVars);
 
 (async () => {
-  const result = await wechatRedirect();
+  const result = await wechatRedirect(true);
   result &&
     new Vue({
       router,
