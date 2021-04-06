@@ -79,6 +79,10 @@ export default {
     },
   },
   async created() {
+    if (!this.$user.organization) {
+      this.$router.replace("/join");
+    }
+
     this.days = await get100Days();
   },
 };

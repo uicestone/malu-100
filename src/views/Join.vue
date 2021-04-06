@@ -41,7 +41,7 @@ export default {
   },
   async created() {
     if (this.$user.organization) {
-      this.$router.push("/countdown");
+      this.$router.replace("/countdown");
     }
     this.orgs = await getOption("malu_organizations");
   },
