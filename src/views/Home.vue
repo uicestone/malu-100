@@ -1,7 +1,8 @@
 <template lang="pug">
 .main
   .start
-    img.img(src="/images/1-home-img.png")
+    img.img(src="/images/2-content-icon.png")
+    img.img.divider(src="/images/1-home-img.png")
     a.link(@click="start")
 </template>
 
@@ -38,8 +39,14 @@ export default {
 }
 .img {
   width: 6.1rem;
-  height: 2.23rem;
+  height: 3rem;
   margin: auto;
+  object-fit: contain;
+}
+.divider {
+  object-fit: cover;
+  height: 0.3rem;
+  object-position: bottom;
 }
 .link {
   width: 6.11rem;
@@ -48,6 +55,6 @@ export default {
   background: url(/images/1-home-btn.png) no-repeat;
   background-size: 100% 100%;
   margin: auto;
-  margin-top: 0.5rem;
+  margin-top: 0.3rem;
 }
 </style>
