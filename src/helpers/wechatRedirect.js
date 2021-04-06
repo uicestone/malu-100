@@ -16,8 +16,8 @@ export default async function wechatRedirect(userInfo = false, state = "") {
   if (query.clear) {
     window.localStorage.clear();
   }
-  const user = window.localStorage.getItem("user");
-  if (user && user.name === "游客") {
+  const userInStorage = window.localStorage.getItem("user");
+  if (userInStorage && JSON.parse(userInStorage).name === "游客") {
     window.localStorage.clear();
   }
   if (query.openid) {
