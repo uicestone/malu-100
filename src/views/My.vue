@@ -13,7 +13,7 @@
               a(v-for="cell in 4")
                 img(
                   v-if="answered(page, row, cell)",
-                  src="/images/6-qa-badge.png"
+                  :src="`/images/badge-${page}.png`"
                 )
                 span {{ getDateText(page, row, cell) }}
       .swiper-pagination
