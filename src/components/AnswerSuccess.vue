@@ -2,7 +2,7 @@
 .pop.pop2
   .tips(style="padding-top: 0.5rem;")
     h1(style="line-height: 1rem;")
-      .section-close-text(v-if="isSectionClose") 恭喜你完成百日倒计时《{{ $sectionNames[section - 1] }}》主题地图，你已打卡{{ $user.answered_days.length }}天。希望你再接再厉！
+      .section-close-text(v-if="isSectionClose") 恭喜你完成百日倒计时《{{ $sectionNames[section - 1] }}》主题地图，你已打卡{{ answeredDays.length }}天。希望你再接再厉！
       div(v-else) 恭喜你打卡成功
         br
         | 获得主题徽章一枚
