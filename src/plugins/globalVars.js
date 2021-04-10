@@ -18,6 +18,11 @@ const globalVars = {
         window.localStorage.setItem("openid", v);
       },
     });
+    Object.defineProperty(Vue.prototype, "$sectionNames", {
+      get() {
+        return ["南湖星火", "峥嵘岁月", "奋辑争先", "不负韶华", "赓续辉煌"];
+      },
+    });
   },
 };
 

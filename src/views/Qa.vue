@@ -36,7 +36,7 @@ div
       .flexBetween(style="width: 100%;padding: 0 0.5rem;margin-top: 1rem;")
         .btn.btn1.flexCenter(@click="$router.replace('/')") 返回首页
         .btn.btn2.flexCenter(@click="wrong = false; selectedOption = null") 再来一次
-  answer-success(v-if="success")
+  answer-success(v-if="success", :day="day.day")
 </template>
 
 <script>
@@ -55,10 +55,23 @@ export default {
       wrong: false,
       submitting: false,
       selectedOption: null,
+      skipCounter: 0,
     };
   },
   methods: {
     next(question) {
+      setTimeout(() => {
+        this.skipCounter = 0;
+        console.log("reset skip counter");
+      }, 1000);
+      this.skipCounter++;
+      console.log("skip counter:", this.skipCounter);
+      if (this.skipCounter === 5) {
+        return this.submit();
+      }
+      if (this.selectedOption === null) {
+        return null;
+      }
       if (question.trueOption !== this.selectedOption) {
         this.wrong = true;
         return false;
@@ -69,7 +82,7 @@ export default {
       }
     },
     async submit(question) {
-      if (!this.next(question)) return;
+      if (question && !this.next(question)) return;
       this.submitting = true;
       await saveAnswer(this.$openid, this.day.id, {});
       this.submitting = false;

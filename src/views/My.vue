@@ -3,7 +3,7 @@
   .header.flexCenter
     img(src="/images/3-my-icon.png")
     span 我的徽章
-  .title.flexCenter {{ titles[currentPage - 1] }}
+  .title.flexCenter {{ $sectionNames[currentPage - 1] }}
   .content
     .swiper-container
       .swiper-wrapper
@@ -29,7 +29,6 @@ export default {
   data: () => {
     return {
       currentPage: 1,
-      titles: ["南湖星火", "峥嵘岁月", "奋辑争先", "不负韶华", "赓续辉煌"],
     };
   },
   methods: {

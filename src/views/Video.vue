@@ -29,7 +29,7 @@
     span(v-if="submitting") 提交中…
     span(v-else-if="uploading") 上传中 {{ (uploadProgress * 100).toFixed() }}% …
     span(v-else) 提交
-  answer-success(v-if="success")
+  answer-success(v-if="success", :day="day.day")
 </template>
 
 <script>
