@@ -136,7 +136,6 @@ export default {
   align-items: center;
 }
 .list li a {
-  display: block;
   width: 1.9rem;
   height: 1.9rem;
   border-radius: 10px;
@@ -144,14 +143,14 @@ export default {
   margin-left: 0.5rem;
   overflow: hidden;
   position: relative;
+  display: flex;
 }
 .list li a img {
-  width: 1.2rem;
-  height: 1.4rem;
-  position: absolute;
-  left: 50%;
-  margin-left: -0.6rem;
-  top: -0.1rem;
+  width: 100%;
+  max-height: 1.35rem;
+  object-fit: contain;
+  text-align: center;
+  padding: 0 0.2rem;
 }
 .list li a span {
   width: 100%;

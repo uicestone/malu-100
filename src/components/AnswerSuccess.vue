@@ -101,7 +101,7 @@ export default {
   margin-top: 1rem;
 }
 .icon2 {
-  width: 2.21rem;
+  width: auto;
   height: 2.44rem;
   margin: auto;
   margin-top: 0rem;
