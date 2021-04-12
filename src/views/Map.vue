@@ -30,9 +30,10 @@ export default {
   data: () => {
     return {
       showTip: false,
-      currentMap: 1,
+      currentMap: null,
       days: [],
       day: null,
+      latestSection: null,
     };
   },
   methods: {
@@ -93,11 +94,7 @@ export default {
     },
     sectionEnabled(s) {
       if (this.$route.query.test) return true;
-      const days = this.days.filter((d) => d.available).map((d) => d.day);
-      days.sort((a, b) => b - a);
-      console.log("latest day is ", days[0]);
-      const latestSection = Math.floor((days[0] - 1) / 20) + 1;
-      return s <= latestSection;
+      return s <= this.latestSection;
     },
     sectionClosed(s) {
       const answeredDays = this.$user.answered_days;
@@ -106,7 +103,6 @@ export default {
       const answeredDaysInSection = answeredDays.filter(
         (d) => d > start && d <= end
       ).length;
-      console.log(answeredDaysInSection, "days answered in section", s);
       return answeredDaysInSection === 20;
     },
     goToMap(s) {
@@ -120,6 +116,10 @@ export default {
     }
 
     this.days = await get100Days();
+    const days = this.days.filter((d) => d.available).map((d) => d.day);
+    days.sort((a, b) => b - a);
+    this.latestSection = Math.floor((days[0] - 1) / 20) + 1;
+    this.currentMap = this.latestSection;
   },
 };
 const positions = [

@@ -40,11 +40,6 @@ export default {
       const answeredDaysInSection = this.answeredDays.filter(
         (d) => d > start && d <= end
       ).length;
-      console.log(
-        answeredDaysInSection,
-        "days answered in section",
-        this.section
-      );
       return answeredDaysInSection === 20;
     },
   },
