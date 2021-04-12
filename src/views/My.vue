@@ -50,6 +50,9 @@ export default {
     },
   },
   mounted() {
+    if (this.$route.query.section) {
+      this.currentPage = +this.$route.query.section;
+    }
     const swiper = new Swiper(".swiper-container", {
       pagination: {
         el: ".swiper-pagination",

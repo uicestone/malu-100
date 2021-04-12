@@ -42,7 +42,7 @@ export default {
     openTip(n) {
       if (!this.answerable(n)) return;
       if (this.answered(n)) {
-        return this.$router.push("/my");
+        return this.$router.push("/my?section=" + this.currentMap);
       }
       this.showTip = true;
       const nthDay = (this.currentMap - 1) * 20 + n;
