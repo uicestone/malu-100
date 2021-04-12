@@ -9,7 +9,7 @@
     img.icon2(:src="`/images/badge-${section}.png`")
     .flexBetween(style="width: 100%;padding: 0 0.5rem;margin-top: 0.5rem;")
       .btn.btn1.flexCenter(@click="$router.replace('/')") 返回首页
-      .btn.btn3.flexCenter(@click="$router.replace('/my')") 我的徽章
+      .btn.btn3.flexCenter(@click="$router.replace('/my?section=' + section)") 我的徽章
 </template>
 
 <script>
