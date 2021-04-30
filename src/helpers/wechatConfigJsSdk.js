@@ -4,7 +4,7 @@ export default async function wechatConfigJsSdk(url) {
   const args = (await http.get("/wx/jsapi-args?url=" + encodeURIComponent(url)))
     .data;
   global.wx.config({
-    debug: false,
+    debug: window.location.search.includes("debug"),
     ...args,
     jsApiList: [
       "startRecord",

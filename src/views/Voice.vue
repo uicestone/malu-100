@@ -94,6 +94,7 @@ export default {
       global.wx.stopRecord({
         success: (res) => {
           this.wxVoiceLocalId = res.localId;
+          this.upload();
         },
       });
       this.recording = false;
@@ -159,7 +160,8 @@ export default {
         localId: this.wxVoiceLocalId,
         isShowProgressTips: 1,
         success: (res) => {
-          this.wxVoiceServerId = res.serverId; // 返回音频的服务器端ID
+          this.wxVoiceServerId = res.serverId;
+          this.uploading = false;
         },
       });
     },
@@ -180,6 +182,13 @@ export default {
     this.video = this.$refs.video;
     this.audio = this.$refs.audio;
     wechatConfigJsSdk(window.location.href);
+    global.wx.ready(() => {
+      global.wx.onVoiceRecordEnd({
+        complete: (res) => {
+          this.wxVoiceLocalId = res.localId;
+        },
+      });
+    });
   },
 };
 </script>
