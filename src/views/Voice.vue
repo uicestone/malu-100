@@ -12,7 +12,7 @@
       x-webkit-airplay="allow",
       x5-video-player-type="h5"
     )
-    audio(ref="audio", :src="audioUrl", style="display:none")
+    //- audio(ref="audio", :src="audioUrl", style="display:none")
   .btn_box.flexBetween
     img.blink(
       src="/images/6-voice-record.png",
@@ -29,7 +29,7 @@
     img(src="/images/6-voice-play.png", @click="play", v-else)
   .btn.flexCenter(
     @click="submit",
-    :class="{ disabled: !audioUrl || submitting }",
+    :class="{ disabled: !wxVoiceServerId || submitting }",
     v-if="!success"
   )
     span(v-if="submitting") 提交中…
@@ -40,7 +40,8 @@
 
 <script>
 import AnswerSuccess from "../components/AnswerSuccess";
-import { get100Day, saveAnswer, http } from "@/helpers/resource";
+import { get100Day, saveAnswer } from "@/helpers/resource";
+import wechatConfigJsSdk from "@/helpers/wechatConfigJsSdk";
 import MicRecorder from "mic-recorder-to-mp3";
 
 export default {
@@ -57,8 +58,10 @@ export default {
       }),
       playing: false,
       recording: false,
-      audioUrl: null,
-      audioFile: null,
+      // audioUrl: null,
+      // audioFile: null,
+      wxVoiceLocalId: null,
+      wxVoiceServerId: null,
       uploading: false,
       uploadProgress: 0,
     };
@@ -71,27 +74,29 @@ export default {
 
       console.log("Start recording...");
 
-      await this.recorder.start();
+      // await this.recorder.start();
+      global.wx.startRecord();
       this.recording = true;
       this.video.currentTime = 0;
-      this.audioUrl = null;
+      // this.audioUrl = null;
+      this.wxVoiceServerId = null;
       this.video.play();
     },
     async stopRecording() {
       console.log("Stop recording.");
       this.video.pause();
-      const [, blob] = await this.recorder.stop().getMp3();
-      console.log(blob);
-      this.audio.src = URL.createObjectURL(blob);
-      this.audioFile = new File([blob], `${Date.now()}.mp3`);
-      console.log("Audio file generated.");
-      await this.upload();
+      // const [, blob] = await this.recorder.stop().getMp3();
+      // console.log(blob);
+      // this.audio.src = URL.createObjectURL(blob);
+      // this.audioFile = new File([blob], `${Date.now()}.mp3`);
+      // console.log("Audio file generated.");
+      // await this.upload();
+      global.wx.stopRecord({
+        success: (res) => {
+          this.wxVoiceLocalId = res.localId;
+        },
+      });
       this.recording = false;
-    },
-    resetRecorder() {
-      this.recording = false;
-      this.audioFile = null;
-      this.audioUrl = null;
     },
     async play() {
       if (this.recording) {
@@ -105,9 +110,13 @@ export default {
       this.video.currentTime = 0;
       this.video.play();
 
-      if (this.audioUrl) {
-        this.audio.currentTime = 0;
-        this.audio.play();
+      if (this.wxVoiceLocalId) {
+        console.log("Play wx voice", this.wxVoiceLocalId);
+        // this.audio.currentTime = 0;
+        // this.audio.play();
+        global.wx.playVoice({
+          localId: this.wxVoiceLocalId,
+        });
       }
 
       this.playing = true;
@@ -115,33 +124,50 @@ export default {
     stop() {
       console.log("Stop playing.");
       this.video.pause();
-      if (this.audioUrl) this.audio.pause();
+      // if (this.audioUrl) this.audio.pause();
+      if (this.wxVoiceLocalId) {
+        global.wx.pauseVoice({
+          localId: this.wxVoiceLocalId,
+        });
+      }
       this.playing = false;
       return;
     },
     async upload() {
-      if (!this.audioFile) {
+      // if (!this.audioFile) {
+      //   return;
+      // }
+      if (!this.wxVoiceLocalId) {
         return;
       }
       this.uploading = true;
-      let formData = new FormData();
-      formData.append("photo", this.audioFile);
+      // let formData = new FormData();
+      // formData.append("photo", this.audioFile);
 
-      const file = (
-        await http.post("pbpark/photo", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-          onUploadProgress: (progressEvent) =>
-            (this.uploadProgress = progressEvent.loaded / progressEvent.total),
-        })
-      ).data;
-      this.uploading = false;
-      this.audioUrl = file.url;
+      // const file = (
+      //   await http.post("pbpark/photo", formData, {
+      //     headers: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //     onUploadProgress: (progressEvent) =>
+      //       (this.uploadProgress = progressEvent.loaded / progressEvent.total),
+      //   })
+      // ).data;
+      // this.uploading = false;
+      // this.audioUrl = file.url;
+      global.wx.uploadVoice({
+        localId: this.wxVoiceLocalId,
+        isShowProgressTips: 1,
+        success: (res) => {
+          this.wxVoiceServerId = res.serverId; // 返回音频的服务器端ID
+        },
+      });
     },
     async submit() {
       this.submitting = true;
-      await saveAnswer(this.$openid, this.day.id, { answer: this.audioUrl });
+      await saveAnswer(this.$openid, this.day.id, {
+        answer: this.wxVoiceServerId,
+      });
       this.submitting = false;
       this.success = true;
     },
@@ -153,6 +179,7 @@ export default {
   mounted() {
     this.video = this.$refs.video;
     this.audio = this.$refs.audio;
+    wechatConfigJsSdk(window.location.href);
   },
 };
 </script>
