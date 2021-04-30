@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const http = Axios.create({
-  baseURL: "http://pbpark.hbird.com.cn/wp-json/v1",
+  baseURL: "https://pbpark.hbird.com.cn/wp-json/v1",
 });
 
 export async function getPosts(params) {
