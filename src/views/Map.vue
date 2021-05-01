@@ -9,14 +9,18 @@ div
         @click="goToMap(s)"
       )
     img.title(v-if="currentMap", :src="`images/5-map-title-${currentMap}.png`")
-    .map(@click="mapClick")
+    .map(@click="mapClick", :class="`map-${currentMap}`")
       img.map-img(v-if="currentMap", :src="`/images/5-map-${currentMap}.png`")
       .day-icon(
         @click.stop="openTip(n)",
         v-for="n in 20",
-        :class="`section-${currentMap}`",
+        :class="{ [`section-${currentMap}`]: true, flipped: getFlipped(currentMap, n) }",
         :style="{ 'background-image': `url(/images/5-map-day-${currentMap}-${getDayStatusText(n)}.png)`, top: getY(currentMap, n) + 'rem', left: getX(currentMap, n) + 'rem' }"
-      ) {{ n }}
+      )
+        span(
+          :class="{ flipped: getFlipped(currentMap, n) }",
+          style="position:absolute;left:0;right:0"
+        ) {{ n }}
   .tips(v-if="showTip")
     .flexBetween(style="width: 100%; height: 100%;padding: 0 0.5rem;")
       .btn.btn1.flexCenter(@click="goToTask") 打卡
@@ -58,7 +62,7 @@ export default {
       this.$router.push("/" + this.day.type + "?dayId=" + this.day.id);
     },
     mapClick(e) {
-      const r = 34.7222222222;
+      const r = 33.33333333333333;
       const y = e.layerY / r - 1.44 / 2;
       const x = e.layerX / r - 1.52 / 2;
       console.log(+x.toFixed(6), +y.toFixed(6));
@@ -68,6 +72,9 @@ export default {
     },
     getY(m, n) {
       return positions?.[m - 1]?.[n - 1]?.[1];
+    },
+    getFlipped(m, n) {
+      return positions?.[m - 1]?.[n - 1]?.[2];
     },
     answerable(n) {
       const nthDay = (this.currentMap - 1) * 20 + n;
@@ -167,6 +174,28 @@ const positions = [
     [8.0816, 0.3168],
     [4.8272, 0.2016],
   ],
+  [
+    [4.79, 20.76, 1],
+    [3.41, 19.41, 1],
+    [5.03, 18.39],
+    [6.14, 16.92, 1],
+    [3.65, 16.5],
+    [4.76, 15.15],
+    [3.86, 13.92],
+    [4.67, 11.91, 1],
+    [3.44, 10.68],
+    [5.69, 10.47],
+    [4.28, 9.09, 1],
+    [4.64, 7.56],
+    [6.23, 6.45, 1],
+    [4.64, 5.61],
+    [6.53, 5.01, 1],
+    [4.55, 4.08, 1],
+    [4.13, 2.25],
+    [6.35, 1.38],
+    [7.82, 0.3, 1],
+    [5, -0.09, 1],
+  ],
 ];
 </script>
 
@@ -177,7 +206,7 @@ const positions = [
   background: url(/images/5-map-bg.png) no-repeat;
   background-size: cover;
   background-position: center;
-  padding: 0.4rem 0;
+  padding: 0.4rem 0 0;
 }
 .stages {
   width: 100%;
@@ -197,6 +226,9 @@ const positions = [
   background-size: 100% 100%;
   margin-top: 0.5rem;
   position: relative;
+}
+.map.map-2 {
+  padding-bottom: 0.5rem;
 }
 .map-img {
   width: 100%;
@@ -222,6 +254,13 @@ const positions = [
   height: 1.68rem;
   margin-top: 0.9rem;
   padding-left: 0.05rem;
+}
+.day-icon.section-3 span {
+  font-size: 0.45rem;
+  top: -0.1rem;
+}
+.flipped {
+  transform: scale(-1, 1);
 }
 .tips {
   width: 8.3rem;
