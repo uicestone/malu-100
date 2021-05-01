@@ -202,6 +202,9 @@ export default {
   background-size: cover;
   background-position: center center;
   padding-top: 2.2rem;
+  min-height: 145vw;
+  height: 100vh;
+  position: relative;
 }
 .title {
   width: 100%;
@@ -236,10 +239,11 @@ video {
   position: absolute;
   left: 50%;
   margin-left: -2.35rem;
-  top: 18.3rem;
+  bottom: 1rem;
   font-size: 0.6rem;
   font-weight: bold;
   color: #956134;
+  z-index: 20;
 }
 .blink {
   animation: blinker 1s linear infinite;
