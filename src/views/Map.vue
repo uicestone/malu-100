@@ -8,9 +8,9 @@ div
         :src="`images/5-map-tab-${s}${sectionEnabled(s) ? (sectionClosed(s) ? 'p' : 'a') : 'd'}.png`",
         @click="goToMap(s)"
       )
-    img.title(:src="`images/5-map-title-${currentMap}.png`")
+    img.title(v-if="currentMap", :src="`images/5-map-title-${currentMap}.png`")
     .map(@click="mapClick")
-      img.map-img(:src="`/images/5-map-${currentMap}.png`")
+      img.map-img(v-if="currentMap", :src="`/images/5-map-${currentMap}.png`")
       .day-icon(
         @click.stop="openTip(n)",
         v-for="n in 20",
