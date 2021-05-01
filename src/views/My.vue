@@ -67,6 +67,7 @@ export default {
         },
       },
     });
+    swiper.slideTo(this.currentPage - 1);
   },
 };
 </script>
