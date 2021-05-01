@@ -40,8 +40,8 @@
 
 <script>
 import AnswerSuccess from "../components/AnswerSuccess";
-import { get100Day, saveAnswer } from "@/helpers/resource";
-import wechatConfigJsSdk from "@/helpers/wechatConfigJsSdk";
+import { get100Day, saveAnswer } from "../helpers/resource";
+import wechatConfigJsSdk from "../helpers/wechatConfigJsSdk";
 import MicRecorder from "mic-recorder-to-mp3";
 
 export default {
@@ -75,7 +75,8 @@ export default {
       console.log("Start recording...");
 
       // await this.recorder.start();
-      global.wx.startRecord();
+      await global.wx.startRecord();
+
       this.recording = true;
       this.video.currentTime = 0;
       // this.audioUrl = null;
@@ -166,6 +167,7 @@ export default {
       });
     },
     async submit() {
+      if (!this.wxVoiceServerId) return;
       this.submitting = true;
       await saveAnswer(this.$openid, this.day.id, {
         answer: this.wxVoiceServerId,
@@ -181,7 +183,7 @@ export default {
   mounted() {
     this.video = this.$refs.video;
     this.audio = this.$refs.audio;
-    wechatConfigJsSdk(window.location.href);
+    wechatConfigJsSdk();
     global.wx.ready(() => {
       global.wx.onVoiceRecordEnd({
         complete: (res) => {

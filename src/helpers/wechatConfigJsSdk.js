@@ -1,10 +1,14 @@
 import { http } from "./resource";
 
-export default async function wechatConfigJsSdk(url) {
+export default async function wechatConfigJsSdk() {
+  const url = window.isIos ? window.entranceUrl : window.location.href;
+  if (window.debug) {
+    alert("Debug Mode, config on url:" + url);
+  }
   const args = (await http.get("/wx/jsapi-args?url=" + encodeURIComponent(url)))
     .data;
-  global.wx.config({
-    debug: window.location.search.includes("debug"),
+  window.wx.config({
+    debug: window.debug,
     ...args,
     jsApiList: [
       "startRecord",
@@ -16,5 +20,8 @@ export default async function wechatConfigJsSdk(url) {
       "onVoicePlayEnd",
       "uploadVoice",
     ],
+  });
+  window.wx.error((err) => {
+    alert("微信配置错误：" + JSON.stringify(err));
   });
 }
