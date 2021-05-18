@@ -19,10 +19,10 @@ div
       )
         span(
           :class="{ flipped: getFlipped(currentMap, n) }",
-          style="position:absolute;left:0;right:0"
+          style="position: absolute; left: 0; right: 0"
         ) {{ n }}
   .tips(v-if="showTip")
-    .flexBetween(style="width: 100%; height: 100%;padding: 0 0.5rem;")
+    .flexBetween(style="width: 100%; height: 100%; padding: 0 0.5rem")
       .btn.btn1.flexCenter(@click="goToTask") 打卡
       .btn.btn2.flexCenter(@click="toggleTip") 取消
 </template>
@@ -196,6 +196,28 @@ const positions = [
     [7.7648, 0.3168, 1],
     [5.1152, -0.0288, 1],
   ],
+  [
+    [8.1968, 20.736],
+    [6.3536, 20.1312],
+    [5.144, 18.8352],
+    [4.0784, 17.4528],
+    [3.5888, 16.0128],
+    [5.2016, 15.1776],
+    [5.5472, 13.5936],
+    [4.3664, 12.672],
+    [3.6752, 11.3472],
+    [4.7696, 10.2528],
+    [6.3536, 9.4752],
+    [5.1728, 8.4384],
+    [3.7616, 7.0848],
+    [3.9344, 5.8176],
+    [5.2016, 5.2128],
+    [6.2672, 4.2048],
+    [5.1728, 2.9664],
+    [3.6176, 2.0448],
+    [2.0048, 1.008],
+    [4.0496, 0.432],
+  ],
 ];
 </script>
 
@@ -224,11 +246,15 @@ const positions = [
   /* height: 22.26rem; */
   background-repeat: no-repeat;
   background-size: 100% 100%;
-  margin-top: 0.5rem;
+  margin-top: 0.49rem;
+  padding-top: 0.01rem;
   position: relative;
 }
 .map.map-2 {
   padding-bottom: 0.5rem;
+}
+.map.map-4 .map-img {
+  margin-top: -6.3rem;
 }
 .map-img {
   width: 100%;
@@ -258,6 +284,13 @@ const positions = [
 .day-icon.section-3 span {
   font-size: 0.45rem;
   top: -0.1rem;
+}
+.day-icon.section-4 span {
+  font-size: 0.55rem;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  letter-spacing: 0.05rem;
+  top: -0.05rem;
+  color: #a58a5f;
 }
 .flipped {
   transform: scale(-1, 1);
@@ -289,5 +322,7 @@ const positions = [
   height: 1.16rem;
   margin: auto;
   margin-top: 1.7rem;
+  position: relative;
+  z-index: 1;
 }
 </style>
