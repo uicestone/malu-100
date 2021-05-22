@@ -255,6 +255,7 @@ const positions = [
 }
 .map.map-4 .map-img {
   margin-top: -6.3rem;
+  pointer-events: none;
 }
 .map-img {
   width: 100%;
