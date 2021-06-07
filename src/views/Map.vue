@@ -218,6 +218,28 @@ const positions = [
     [2.0048, 1.008],
     [4.0496, 0.432],
   ],
+  [
+    [7.7648, 20.2752],
+    [6.296, 19.6992],
+    [5.0864, 18.576],
+    [4.1936, 17.1648],
+    [4.0496, 15.6672],
+    [5.2304, 15.0336],
+    [5.4896, 13.5936],
+    [4.4816, 12.4416],
+    [3.6752, 11.2032],
+    [4.6544, 10.1952],
+    [5.6048, 9.1584],
+    [4.8848, 7.9776],
+    [3.9344, 6.7104],
+    [4.3376, 5.472],
+    [5.576, 4.8096],
+    [6.3248, 3.3984],
+    [5.2304, 2.5344],
+    [3.7328, 1.6416],
+    [2.3216, 0.7488],
+    [4.28, -0.1728],
+  ],
 ];
 </script>
 
@@ -257,6 +279,10 @@ const positions = [
   margin-top: -6.3rem;
   pointer-events: none;
 }
+.map.map-5 .map-img {
+  margin-top: -6.3rem;
+  pointer-events: none;
+}
 .map-img {
   width: 100%;
 }
@@ -292,6 +318,13 @@ const positions = [
   letter-spacing: 0.05rem;
   top: -0.05rem;
   color: #a58a5f;
+}
+.day-icon.section-5 span {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: 0.45rem;
+  margin-left: 0.1rem;
+  margin-top: 0.25rem;
+  text-shadow: 0.03rem 0.03rem 0.08rem #afafaf;
 }
 .flipped {
   transform: scale(-1, 1);
