@@ -49,11 +49,11 @@ export default {
     if (this.$route.query.username) {
       this.fromShareUserName = this.$route.query.username;
     }
-    await sleep(10000);
+    await sleep(7e3);
     this.showScreen = 2;
-    await sleep(10000);
+    await sleep(7e3);
     this.showScreen = 3;
-    await sleep(10000);
+    await sleep(7e3);
     this.showScreen = 4;
     if (window.wx) {
       window.wx.updateAppMessageShareData({
