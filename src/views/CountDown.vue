@@ -22,22 +22,22 @@
     span {{ minutes | format }}
     i :
     span {{ seconds | format }}
-  .links
+  .links(:class="{ 'is-end': answeredDaysCount >= 100 }")
     router-link.tag.tag1.flexEnd(to="rule")
       img.icon1(src="/images/2-content-item-icon-1.png")
       span 打卡须知
     router-link.tag.tag2.flexEnd(to="map")
       img.icon2(src="/images/2-content-item-icon-2.png")
       span 百日打卡
-    router-link.tag.tag3.flexEnd(to="my")
-      img.icon3(src="/images/2-content-item-icon-3.png")
-      span 我的徽章
     router-link.tag.tag3.flexEnd(
       to="achievement",
       v-if="answeredDaysCount >= 100"
     )
-      img.icon2(src="/images/2-content-item-icon-2.png")
+      img.icon4(src="/images/2-content-item-icon-4.png")
       span 我的成就
+    router-link.tag.tag3.flexEnd(to="my")
+      img.icon3(src="/images/2-content-item-icon-3.png")
+      span 我的徽章
 </template>
 
 <script>
@@ -196,11 +196,21 @@ h1 {
   left: 0.55rem;
   top: 0.5rem;
 }
+.icon4 {
+  width: 0.8rem;
+  position: absolute;
+  left: 0.63rem;
+  top: 0.5rem;
+}
 .tag1 {
   margin-top: 0.5rem;
 }
 .tag2,
 .tag3 {
   margin-top: 0.5rem;
+}
+.is-end .tag2,
+.is-end .tag3 {
+  margin-top: 0;
 }
 </style>
