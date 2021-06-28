@@ -6,10 +6,14 @@
     .split
     .icon-malu
       img(src="/images/2-content-title.png")
-  h1
+  h1(v-if="diff > 0")
     | 距离中国共产党成立
     br
     | 100周年华诞
+  h1(v-else) 庆祝中国共产党成立
+    br
+    | 100周年华诞
+
   .time.flexBetween
     span {{ days | format }}
     i :
@@ -28,22 +32,35 @@
     router-link.tag.tag3.flexEnd(to="my")
       img.icon3(src="/images/2-content-item-icon-3.png")
       span 我的徽章
+    router-link.tag.tag3.flexEnd(
+      to="achievement",
+      v-if="answeredDaysCount >= 100"
+    )
+      img.icon2(src="/images/2-content-item-icon-2.png")
+      span 我的成就
 </template>
 
 <script>
 const target = new Date("2021/07/01 00:00:00").valueOf() / 1000;
 export default {
   data: () => {
-    return { interval: null, now: Date.now() / 1000 };
+    return {
+      interval: null,
+      now: Date.now() / 1000,
+      answeredDaysCount: 0,
+      isEnd: false,
+    };
   },
   created() {
     this.interval = setInterval(() => {
       this.now = Date.now() / 1000;
     }, 100);
+    this.answeredDaysCount = this.$user.answered_days.length;
   },
   computed: {
     diff() {
-      return target - this.now;
+      const diff = target - this.now;
+      return Math.max(diff, 0);
     },
     days() {
       return Math.floor(this.diff / 86400);
@@ -61,6 +78,14 @@ export default {
   filters: {
     format(s) {
       return s.toString().padStart(2, "0").substr(-2);
+    },
+  },
+  watch: {
+    diff(diff) {
+      if (diff <= 0) {
+        this.isEnd = true;
+        clearInterval(this.interval);
+      }
     },
   },
 };
