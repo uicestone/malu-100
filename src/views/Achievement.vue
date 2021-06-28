@@ -22,7 +22,7 @@
   .screen-4.screen(:class="{ hide: showScreen !== 4 }")
     img(src="/images/achievement-4.png")
     .username {{ $user.name }}
-    a.btn.flexCenter(@click="showShareHint = true") 分享到朋友圈
+    a.btn.flexCenter(@click="showShareHint = true", v-if="!fromShare") 分享到朋友圈
   .share-hint(v-if="showShareHint", @click="showShareHint = false")
     p 请点击右上角
     p 发送给群和朋友
@@ -38,15 +38,36 @@ export default {
     return {
       showScreen: 1,
       showShareHint: false,
+      fromShare: false,
+      fromShareUserName: null,
     };
   },
   async mounted() {
+    if (this.$route.query.fromShare) {
+      this.fromShare = true;
+    }
+    if (this.$route.query.username) {
+      this.fromShareUserName = this.$route.query.username;
+    }
     await sleep(10000);
     this.showScreen = 2;
     await sleep(10000);
     this.showScreen = 3;
     await sleep(10000);
     this.showScreen = 4;
+    if (window.wx) {
+      window.wx.updateAppMessageShareData({
+        title: "我已打卡百天，获得嘉定新城(马陆镇)比学赶超百日先锋称号", // 分享标题
+        desc: "我已打卡百天，获得嘉定新城(马陆镇)比学赶超百日先锋称号", // 分享描述
+        link:
+          "https://100.malu.hbird.com.cn/achievement?from-share=1&username=" +
+          encodeURIComponent(this.$user.name), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: "https://100.malu.hbird.com.cn/images/2-content-title.png", // 分享图标
+        success: function () {
+          // 设置成功
+        },
+      });
+    }
   },
 };
 </script>
@@ -92,7 +113,7 @@ img.screen,
 .screen img {
   margin: 0 auto;
   max-width: 100%;
-  width: 10rem;
+  width: 8rem;
 }
 .title {
   width: 9rem;
@@ -111,10 +132,10 @@ img.screen,
 }
 .username {
   position: absolute;
-  top: 4.7rem;
+  top: 3.7rem;
   width: 100%;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 @keyframes fadeInAndOut {
   0%,
@@ -143,7 +164,8 @@ img.screen,
   font-size: 0.6rem;
   font-weight: bold;
   color: #614c3f;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 .share-hint {
   position: fixed;
