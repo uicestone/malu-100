@@ -22,6 +22,12 @@
   .screen-4.screen(:class="{ hide: showScreen !== 4 }")
     img(src="/images/achievement-4.png")
     .username {{ $user.name }}
+    a.btn.flexCenter(@click="showShareHint = true") 分享到朋友圈
+  .share-hint(v-if="showShareHint", @click="showShareHint = false")
+    p 请点击右上角
+    p 发送给群和朋友
+    p 或分享到朋友圈
+    img(src="/images/share-arrow.png")
 </template>
 
 <script>
@@ -31,6 +37,7 @@ export default {
   data() {
     return {
       showScreen: 1,
+      showShareHint: false,
     };
   },
   async mounted() {
@@ -78,7 +85,7 @@ export default {
   max-width: 100%;
 }
 .screen {
-  animation: fadeInAndOut 10s;
+  animation: fadeInAndOut 7s;
   opacity: 0;
 }
 img.screen,
@@ -126,5 +133,39 @@ img.screen,
   100% {
     opacity: 1;
   }
+}
+.btn {
+  width: 4.8rem;
+  height: 1.34rem;
+  background: url(/images/6-btn-submit-bg.png) no-repeat;
+  background-size: 100% 100%;
+  margin: auto;
+  font-size: 0.6rem;
+  font-weight: bold;
+  color: #614c3f;
+  margin-top: 1rem;
+}
+.share-hint {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 20;
+  text-align: right;
+  padding-right: 3rem;
+  padding-top: 4rem;
+  font-weight: bold;
+  color: white;
+}
+.share-hint img {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  width: 2rem;
+}
+.share-hint p {
+  font-size: 0.7rem;
 }
 </style>
