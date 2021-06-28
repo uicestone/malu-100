@@ -19,6 +19,8 @@ export default async function wechatConfigJsSdk() {
       "stopVoice",
       "onVoicePlayEnd",
       "uploadVoice",
+      "updateAppMessageShareData",
+      "updateTimelineShareData",
     ],
   });
   window.wx.error((err) => {
