@@ -59,6 +59,11 @@ const routes = [
     name: "Voice",
     component: () => import("../views/Voice.vue"),
   },
+  {
+    path: "/achievement",
+    name: "Achievement",
+    component: () => import("../views/Achievement.vue"),
+  },
 ];
 
 const router = new VueRouter({
