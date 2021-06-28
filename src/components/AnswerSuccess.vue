@@ -2,13 +2,19 @@
 .pop.pop2
   .tips(style="padding-top: 0.5rem;")
     h1(style="line-height: 1rem;")
-      .section-close-text(v-if="isSectionClose") 恭喜你完成百日倒计时《{{ $sectionNames[section - 1] }}》主题地图，你已打卡{{ answeredDays.length }}天。希望你再接再厉！
+      .section-close-text(v-if="isSectionClose") 恭喜你完成百日倒计时《{{ $sectionNames[section - 1] }}》主题地图，你已打卡{{ answeredDays.length }}天，
+        span(v-if="isAllFinish") 请到我的成就中查看证书。
+        span(v-else) 希望你再接再厉！
       div(v-else) 恭喜你打卡成功
         br
         | 获得主题徽章一枚
     img.icon2(:src="`/images/badge-${section}.png`")
     .flexBetween(style="width: 100%;padding: 0 0.5rem;margin-top: 0.5rem;")
-      .btn.btn1.flexCenter(@click="$router.replace('/')") 返回首页
+      .btn.btn1.flexCenter(
+        @click="$router.replace('/achievement')",
+        v-if="isAllFinish"
+      ) 我的成就
+      .btn.btn1.flexCenter(@click="$router.replace('/')", v-else) 返回首页
       .btn.btn3.flexCenter(@click="$router.replace('/my?section=' + section)") 我的徽章
 </template>
 
@@ -41,6 +47,9 @@ export default {
         (d) => d > start && d <= end
       ).length;
       return answeredDaysInSection === 20;
+    },
+    isAllFinish() {
+      return this.answeredDays.length >= 100;
     },
   },
 };
