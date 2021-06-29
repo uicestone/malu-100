@@ -52,7 +52,7 @@ export default {
         link:
           "https://100.malu.hbird.com.cn/achievement?from-share=1&username=" +
           encodeURIComponent(this.$user.name), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: "https://100.malu.hbird.com.cn/images/2-content-title.png", // 分享图标
+        imgUrl: "https://100.malu.hbird.com.cn/images/malu-logo.png", // 分享图标
         success: function () {
           // 设置成功
         },
@@ -62,7 +62,7 @@ export default {
         link:
           "https://100.malu.hbird.com.cn/achievement?from-share=1&username=" +
           encodeURIComponent(this.$user.name), // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: "https://100.malu.hbird.com.cn/images/2-content-title.png", // 分享图标
+        imgUrl: "https://100.malu.hbird.com.cn/images/malu-logo.png", // 分享图标
         success: function () {
           // 设置成功
         },
