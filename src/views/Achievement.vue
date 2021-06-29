@@ -28,7 +28,7 @@
     p 发送给群和朋友
     p 或分享到朋友圈
     img(src="/images/share-arrow.png")
-  audio(ref="audio", src="/audio/achievement.mp3", style="display:none")
+  audio(ref="audio", src="/audio/achieve-100.mp3", style="display:none")
 </template>
 
 <script>
