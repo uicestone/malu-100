@@ -28,6 +28,7 @@
     p 发送给群和朋友
     p 或分享到朋友圈
     img(src="/images/share-arrow.png")
+  audio(ref="audio", src="/audio/achievement.mp3", style="display:none")
 </template>
 
 <script>
@@ -44,6 +45,7 @@ export default {
     };
   },
   async mounted() {
+    this.$refs["audio"].play();
     wechatConfigJsSdk();
     global.wx.ready(() => {
       global.wx.updateAppMessageShareData({
@@ -75,11 +77,11 @@ export default {
     if (this.$route.query.username) {
       this.fromShareUserName = this.$route.query.username;
     }
-    await sleep(7e3);
+    await sleep(6.5e3);
     this.showScreen = 2;
-    await sleep(7e3);
+    await sleep(6.5e3);
     this.showScreen = 3;
-    await sleep(7e3);
+    await sleep(6.5e3);
     this.showScreen = 4;
   },
 };
@@ -119,7 +121,7 @@ export default {
   max-width: 100%;
 }
 .screen {
-  animation: fadeInAndOut 7s;
+  animation: fadeInAndOut 6.5s;
   opacity: 0;
 }
 img.screen,
