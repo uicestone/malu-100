@@ -7,7 +7,7 @@
     .icon-malu
       img(src="/images/2-content-title.png")
   //- .content
-  img.screen.title(
+  img.screen.screen-1.title(
     src="/images/achievement-title.png",
     :class="{ hide: showScreen !== 1 }"
   )
@@ -126,6 +126,12 @@ img.screen,
 .screen img {
   margin: 0 auto;
   max-width: 100%;
+}
+img.screen {
+  width: 9rem;
+  margin-top: 1rem;
+}
+.screen img {
   height: calc(100vh - 7.5rem);
 }
 .title {
